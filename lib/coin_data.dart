@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const apiKey = 'A2C1D680-BE36-4886-8336-9F06F99BC6D1';
+const apiKey = '5AF12FDF-1374-4650-A294-027BD612418C';
 
 const List<String> currenciesList = [
   'AUD',
@@ -56,7 +56,11 @@ class CoinDataModel {
         'https://rest.coinapi.io/v1/exchangerate/$cryptolist/$currency?apikey=$apiKey');
 
     var coinCurrency = await coinData.getCoinData() as Map<String, dynamic>;
-    var newRate = coinCurrency['rate'] as double;
-    return newRate.toStringAsFixed(2);
+    var newRate = coinCurrency['rate'];
+    if (newRate is int) {
+      return newRate.toString();
+    } else {
+      return newRate.toStringAsFixed(2);
+    }
   }
 }
