@@ -52,9 +52,8 @@ class CoinData {
 
 class CoinDataModel {
   Future<String> getCoinDataModel(String currency, String cryptolist) async {
-    CoinData coinData = CoinData(
-        'https://rest.coinapi.io/v1/exchangerate/$cryptolist/$currency?apikey=$apiKey');
-
+    var url = 'https://rest.coinapi.io/v1/exchangerate/$cryptolist/$currency?apikey=$apiKey';
+    CoinData coinData = CoinData(url);
     var coinCurrency = await coinData.getCoinData() as Map<String, dynamic>;
     var newRate = coinCurrency['rate'];
     if (newRate is int) {
